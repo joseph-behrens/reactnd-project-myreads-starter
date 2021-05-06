@@ -4,6 +4,10 @@ import './App.css'
 import BookShelf from './components/BookShelf'
 
 class BooksApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.changeShelf = this.changeShelf.bind(this);
+  }
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -78,7 +82,16 @@ class BooksApp extends React.Component {
     ],
     showSearchPage: false
   }
-
+  changeShelf(event, book) {
+    event.persist()
+    let i = this.state.books.findIndex(element => element.id === book.id)
+    this.setState((prevState) => {
+      let updatedBooks = [...prevState.books]
+      updatedBooks[i] = { ...updatedBooks[i], shelf: event.target.value }
+      return { books: updatedBooks }
+    })
+    // this.setState({ books[i]: { shelf: event.target.value } })
+  }
   render() {
     return (
       <div className="app">
@@ -113,14 +126,17 @@ class BooksApp extends React.Component {
                 <BookShelf
                   title="Currently Reading"
                   books={this.state.books.filter(book => book.shelf === "currentlyReading")}
+                  changeShelf={this.changeShelf}
                 />
                 <BookShelf
                   title="Want to Read"
                   books={this.state.books.filter(book => book.shelf === "wantToRead")}
+                  changeShelf={this.changeShelf}
                 />
                 <BookShelf
                   title="Read"
                   books={this.state.books.filter(book => book.shelf === "read")}
+                  changeShelf={this.changeShelf}
                 />
               </div>
             </div>
