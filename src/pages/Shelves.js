@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import BookShelf from '../components/BookShelf';
 
@@ -30,7 +30,7 @@ class Shelves extends Component {
                 </div>
                 <div className="open-search">
                     <Link to="/search">
-                        <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
+                        <button>Add a book</button>
                     </Link>
                 </div>
             </div>
@@ -40,8 +40,8 @@ class Shelves extends Component {
 
 Shelves.protoTypes = {
     changeShelf: PropTypes.func.isRequired,
-    books: PropTypes.arrayOf(PropTypes.object),
-    shelves: PropTypes.arrayOf(PropTypes.string)
+    books: PropTypes.arrayOf(PropTypes.object).isRequired,
+    shelves: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
 export default Shelves;
