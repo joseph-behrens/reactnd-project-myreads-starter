@@ -4,12 +4,12 @@ import ShelfChanger from './ShelfChanger';
 
 class Book extends Component {
     render() {
-        const { book, changeShelf } = this.props;
+        const { book, shelves, changeShelf } = this.props;
         return (
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: parseInt(book.width), height: parseInt(book.height), backgroundImage: `url(${book.backgroundImage})` }}></div>
-                    <ShelfChanger changeShelf={changeShelf} book={book} />
+                    <ShelfChanger changeShelf={changeShelf} book={book} shelves={shelves} />
                 </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{book.authors}</div>

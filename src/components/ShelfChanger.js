@@ -6,13 +6,18 @@ class ShelfChanger extends Component {
         this.props.changeShelf(event, this.props.book)
     }
     render() {
+        const {shelves} = this.props;
         return (
             <div className="book-shelf-changer">
                 <select onChange={this.handleChange} value={this.props.book.shelf}>
                     <option value="move" disabled>Move to...</option>
-                    <option value="currentlyReading">Currently Reading</option>
-                    <option value="wantToRead">Want to Read</option>
-                    <option value="read">Read</option>
+                    {shelves.map(shelf => {
+                        let title = shelf.replace(/([A-Z])/g, " $1");
+                        title = title.charAt(0).toUpperCase() + title.slice(1);
+                        return (
+                            <option key={shelf} value={shelf}>{title}</option>
+                        )
+                    })}
                     <option value="none">None</option>
                 </select>
             </div>
